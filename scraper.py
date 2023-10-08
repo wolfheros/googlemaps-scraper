@@ -58,7 +58,7 @@ if __name__ == '__main__':
                         while n < args.N:
 
                             # logging to std out
-                            print(colored('[Review ' + str(n) + ']', 'cyan'))
+                            #print(colored('[Review ' + str(n) + ']', 'cyan'))
 
                             reviews = scraper.get_reviews(n)
                             if len(reviews) == 0:

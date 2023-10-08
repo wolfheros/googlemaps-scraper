@@ -1,16 +1,14 @@
-# Google Maps Scraper
-Scraper of Google Maps reviews.
-The code allows to extract the **most recent** reviews starting from the url of a specific Point Of Interest (POI) in Google Maps.
-An additional extension helps to monitor and incrementally store the reviews in a MongoDB instance.
+# Google Maps Scraper(Only tested on Windows 11 )
+Scraper of Google Maps reviews. It is very simple tools to download reviews.
 
 ## Installation
 Follow these steps to use the scraper:
-- Download Chromedrive from [here](https://chromedriver.storage.googleapis.com/index.html?path=2.45/).
-- Install Python packages from requirements file, either using pip, conda or virtualenv:
+- Install Python packages from requirements file,using pip:
 
-        conda create --name scraping python=3.6 --file requirements.txt
+         pip install -r requirements.txt
+- Put your url link in the file ``urls.txt``, all you links should at ``Google Map Reviews`` page.
 
-**Note**: Python >= 3.6 is required.
+**Note**: Python >= 3.6 is required, but less than version 3.9 (include).
 
 ## Basic Usage
 The scraper.py script needs two main parameters as input:
@@ -19,7 +17,7 @@ The scraper.py script needs two main parameters as input:
 
 Example:
 
-  `python scraper.py --N 50`
+  `python scraper.py --i .\urls.txt --N 50`
 
 generates a csv file containing last 50 reviews of places present in _urls.txt_
 
@@ -31,7 +29,6 @@ Additionally, other parameters can be provided:
 - `--source`: boolean value that allows to store source URL as additional field in CSV (default: false)
 - `--sort-by`: string value among most_relevant, newest, highest_rating or lowest_rating (default: newest), developed by @quaesito and that allows to change sorting behavior of reviews
 
-For a basic description of logic and approach about this software development, have a look at the [Medium post](https://towardsdatascience.com/scraping-google-maps-reviews-in-python-2b153c655fc2)
 
 ## Monitoring functionality
 The monitor.py script can be used to have an incremental scraper and override the limitation about the number of reviews that can be retrieved.
@@ -42,12 +39,3 @@ The script takes two input:
 - `--from-date`: string date in the format YYYY-MM-DD, gives the minimum date that the scraper tries to obtain
 
 The main idea is to **periodically** run the script to obtain latest reviews: the scraper stores them in MongoDB up to get either the latest review of previous run or the day indicated in the input parameter.
-
-Take a look to this [Medium post](https://medium.com/@mattiagasparini2/monitoring-of-google-maps-reviews-29e5d35f9d17) to have more details about the idea behind this feature.
-
-## Notes
-Url must be provided as expected, you can check the example file urls.txt to have an idea of what is a correct url.
-If you want to generate the correct url:
-1. Go to Google Maps and look for a specific place;
-2. Click on the number of reviews in the parenthesis;
-3. Save the url that is generated from previous interaction.
